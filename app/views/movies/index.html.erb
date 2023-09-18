@@ -1,0 +1,16 @@
+<!-- app/views/movies/index.html.erb -->
+
+<h1>Popular Movies</h1>
+<ul>
+  <% @movies.results.each do |movie| %>
+    <li>
+      <% if movie.poster_path.present? %>
+        <% cache(movie) do %>
+          <a href="<%= movie_path(movie.id) %>">
+            <img src="https://image.tmdb.org/t/p/w300<%= movie.poster_path %>" alt="<%= movie.title %> Poster">
+          </a>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

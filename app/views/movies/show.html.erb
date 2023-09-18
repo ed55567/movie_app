@@ -1,0 +1,51 @@
+<!-- app/views/movies/show.html.erb -->
+
+<h1><%= @movie.title %></h1>
+
+<% if @movie.poster_path.present? %>
+  <img src="https://image.tmdb.org/t/p/w500<%= @movie.poster_path %>" alt="<%= @movie.title %> Poster">
+<% end %>
+
+<% if @movie.trailer_key.present? %>
+  <h2>Trailer</h2>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @movie.trailer_key %>" frameborder="0" allowfullscreen></iframe>
+<% end %>
+
+<p><strong>Overview:</strong> <%= @movie.overview %></p>
+<p><strong>Release Date:</strong> <%= @movie.release_date %></p>
+<p><strong>Genres:</strong>
+  <% @movie.genres.each do |genre| %>
+    <%= genre.name %>
+    <% unless genre == @movie.genres.last %>, <% end %>
+  <% end %>
+</p>
+<p><strong>Runtime:</strong> <%= @movie.runtime %> minutes</p>
+<p><strong>Average Vote:</strong> <%= @movie.vote_average %> (out of 10)</p>
+<p><strong>Original Title:</strong> <%= @movie.original_title %></p>
+<p><strong>Tagline:</strong> <%= @movie.tagline %></p>
+<p><strong>Production Companies:</strong>
+  <% @movie.production_companies.each do |company| %>
+    <%= company.name %>
+    <% unless company == @movie.production_companies.last %>, <% end %>
+  <% end %>
+</p>
+<p><strong>Production Countries:</strong>
+  <% @movie.production_countries.each do |country| %>
+    <%= country.name %>
+    <% unless country == @movie.production_countries.last %>, <% end %>
+  <% end %>
+</p>
+<p><strong>Spoken Languages:</strong>
+  <% @movie.spoken_languages.each do |language| %>
+    <%= language.name %>
+    <% unless language == @movie.spoken_languages.last %>, <% end %>
+  <% end %>
+</p>
+
+<!-- Display Actors -->
+<p><strong>Actors:</strong> <%= @movie.actors %></p>
+
+<!-- Display Box Office -->
+<p><strong>Box Office:</strong> <%= @movie.box_office %></p>
+
+<%= link_to 'Back to Movies', movies_path %>
